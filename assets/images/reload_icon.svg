@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="51.84" height="51.84" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 51.84 51.84">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-2 {
+        fill: #547093;
+      }
+
+      .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-7 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-3 {
+        fill: #fff;
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-5 {
+        fill: url(#radial-gradient);
+        mix-blend-mode: color-dodge;
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="25.92" y1="1.45" x2="25.92" y2="57.2" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset=".41" stop-color="#ddd"/>
+      <stop offset="1" stop-color="#b3b3b3"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="4.48" y1="25.92" x2="47.35" y2="25.92" gradientTransform="translate(45.19 -5.26) rotate(76.72)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#765293"/>
+      <stop offset="1" stop-color="#3b8693"/>
+    </linearGradient>
+    <radialGradient id="radial-gradient" cx="28.95" cy="37.67" fx="28.95" fy="37.67" r="35.15" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f1f1f"/>
+      <stop offset=".25" stop-color="#121212"/>
+      <stop offset=".65" stop-color="#040404"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="-1.42" dy="0"/>
+      <feGaussianBlur result="blur" stdDeviation="0"/>
+      <feFlood flood-color="#010101" flood-opacity=".2"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-6">
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="Layer_1-2" data-name="Layer 1">
+        <g>
+          <g>
+            <circle class="cls-1" cx="25.92" cy="25.92" r="25.92"/>
+            <circle class="cls-4" cx="25.92" cy="25.92" r="21.44" transform="translate(-5.26 45.19) rotate(-76.72)"/>
+            <circle class="cls-3" cx="25.92" cy="25.92" r="17.62"/>
+            <path class="cls-5" d="m14.51,30.74c5.29-5.29,13.14-8.54,20.61-8.54,2.87,0,5.63.44,8.24,1.25-1.2-8.56-8.55-15.16-17.45-15.16-9.73,0-17.62,7.89-17.62,17.62,0,3.4.97,6.57,2.63,9.27,1.08-1.64,2.29-3.15,3.58-4.44Z"/>
+          </g>
+          <g class="cls-7">
+            <path class="cls-2" d="m34.85,24.64c-.7,0-1.28.57-1.28,1.28,0,4.22-3.44,7.66-7.66,7.66s-7.66-3.44-7.66-7.66,3.44-7.66,7.66-7.66c1.88,0,3.66.69,5.05,1.91h-1.72c-.7,0-1.28.57-1.28,1.28s.57,1.28,1.28,1.28h4.44c.7,0,1.28-.57,1.28-1.28v-4.44c0-.7-.57-1.28-1.28-1.28s-1.28.57-1.28,1.28v1.04c-1.82-1.5-4.1-2.35-6.49-2.35-5.63,0-10.21,4.58-10.21,10.21s4.58,10.21,10.21,10.21,10.21-4.58,10.21-10.21c0-.7-.57-1.28-1.28-1.28h0Z"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

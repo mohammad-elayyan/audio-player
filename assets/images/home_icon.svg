@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="69.31" height="69.31" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 69.31 69.31">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-1, .cls-2, .cls-3, .cls-4, .cls-5 {
+        stroke-width: 0px;
+      }
+
+      .cls-6 {
+        isolation: isolate;
+      }
+
+      .cls-7 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-2 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: url(#linear-gradient-2);
+      }
+
+      .cls-4 {
+        fill: url(#radial-gradient);
+        mix-blend-mode: color-dodge;
+      }
+
+      .cls-5 {
+        fill: url(#linear-gradient-3);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="34.65" y1="1.94" x2="34.65" y2="76.48" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#f5f5f5"/>
+      <stop offset=".41" stop-color="#ddd"/>
+      <stop offset="1" stop-color="#b3b3b3"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="5.99" y1="34.65" x2="63.32" y2="34.65" gradientTransform="translate(60.42 -7.03) rotate(76.72)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#765293"/>
+      <stop offset="1" stop-color="#3b8693"/>
+    </linearGradient>
+    <radialGradient id="radial-gradient" cx="38.7" cy="50.36" fx="38.7" fy="50.36" r="46.99" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#1f1f1f"/>
+      <stop offset=".25" stop-color="#121212"/>
+      <stop offset=".65" stop-color="#040404"/>
+      <stop offset="1" stop-color="#000"/>
+    </radialGradient>
+    <filter id="drop-shadow-1" filterUnits="userSpaceOnUse">
+      <feOffset dx="0" dy="2.21"/>
+      <feGaussianBlur result="blur" stdDeviation="0"/>
+      <feFlood flood-color="#000" flood-opacity=".2"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-3" x1="30.45" y1="44.87" x2="42.89" y2="7.77" gradientTransform="matrix(1,0,0,1,0,0)" xlink:href="#linear-gradient-2"/>
+  </defs>
+  <g class="cls-6">
+    <g id="Layer_2" data-name="Layer 2">
+      <g id="Layer_2-2" data-name="Layer 2">
+        <g>
+          <g>
+            <circle class="cls-1" cx="34.65" cy="34.65" r="34.65"/>
+            <circle class="cls-3" cx="34.65" cy="34.65" r="28.66" transform="translate(-7.03 60.42) rotate(-76.72)"/>
+            <circle class="cls-2" cx="34.65" cy="34.65" r="23.56"/>
+            <path class="cls-4" d="m19.4,41.1c7.07-7.07,17.57-11.42,27.56-11.42,3.84,0,7.52.59,11.02,1.67-1.6-11.45-11.43-20.27-23.33-20.27-13.01,0-23.56,10.55-23.56,23.56,0,4.55,1.29,8.79,3.52,12.39,1.45-2.2,3.06-4.21,4.79-5.94Z"/>
+          </g>
+          <g class="cls-7">
+            <path class="cls-5" d="m48.52,29.31s0,0,0,0l-11.96-11.96c-.51-.51-1.19-.79-1.91-.79s-1.4.28-1.91.79l-11.95,11.95s0,0-.01.01c-1.05,1.05-1.04,2.76,0,3.81.48.48,1.11.76,1.79.79.03,0,.06,0,.08,0h.48v8.8c0,1.74,1.42,3.16,3.16,3.16h4.68c.47,0,.86-.38.86-.86v-6.9c0-.79.65-1.44,1.44-1.44h2.76c.79,0,1.44.65,1.44,1.44v6.9c0,.47.38.86.86.86h4.68c1.74,0,3.16-1.42,3.16-3.16v-8.8h.44c.72,0,1.4-.28,1.91-.79,1.05-1.05,1.05-2.76,0-3.81h0Z"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

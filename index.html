@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="/assets/images/favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1">
+    <title>Kaplan</title>
+    <link rel="stylesheet" href="assets/css/audio.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        @font-face {
+            font-family: button;
+            src: url(./assets/fonts/BUTTON-FONT/BUTTON-FONT.otf);
+        }
+
+        @font-face {
+            font-family: Roboto-M;
+            src: url(./assets/fonts/TEXT/Roboto-Medium.ttf);
+        }
+
+        @font-face {
+            font-family: Roboto-MI;
+            src: url(./assets/fonts/TEXT/Roboto-MediumItalic.ttf);
+        }
+
+        @font-face {
+            font-family: Roboto-R;
+            src: url(./assets/fonts/TEXT/Roboto-Regular.ttf);
+        }
+
+        .listening h1 {
+            font-family: Roboto-M;
+        }
+
+        .listening-intro {
+            position: absolute;
+            top: 9%;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            z-index: -1;
+            /* transform: translateY(-1.9%); */
+            width: 100%;
+        }
+
+        .start-listening {
+            position: absolute;
+            top: 65%;
+            left: 50%;
+            width: 10vw;
+            transform: translate(-60%, 65%);
+            cursor: pointer;
+        }
+
+        .listening-content,
+        .questions,
+        .articles-page {
+            display: none;
+            width: 95%;
+            margin: 3.9vw auto;
+        }
+
+        .listening-content .img,
+        .articles-page .img {
+            position: absolute;
+            top: 8%;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            z-index: -1;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .listening-content .img::after {
+            content: '';
+            width: 95%;
+            height: 30%;
+            position: absolute;
+            bottom: 0;
+            background-color: #fff;
+            border-bottom-left-radius: 34px;
+            border-bottom-right-radius: 34px;
+        }
+
+        .audio {
+            width: 50vw;
+            background: rebeccapurple;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -40%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .articles h1 {
+            color: #fff;
+            position: relative;
+            z-index: 1;
+            font-size: 2.4vw;
+        }
+
+
+        .articles h1::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2vw;
+            background-color: #23A8AF;
+            z-index: -1;
+        }
+
+        .articles-page h1 {
+            font-size: 1.8vw;
+        }
+
+        .articles-page h1::after {
+            height: 1.2vw;
+        }
+
+        .article-btns {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 5vw;
+            width: 84%;
+        }
+
+        .article-btn:hover {
+            color: rgb(239, 239, 255);
+            box-shadow: 0 .1vw .3vw .09vw rgba(239, 239, 255, .8);
+        }
+
+        .article-btns div {
+            position: relative;
+        }
+
+        .article-btns img {
+            width: 20vw;
+            max-width: 450px;
+            cursor: pointer;
+        }
+
+        .article-btns h1 {
+            position: absolute;
+            font-size: 1.6vw;
+            left: 1.7vw;
+            top: 28%;
+            color: #000;
+            cursor: pointer;
+        }
+
+        .article-btns h1::after {
+            height: .4vw;
+            top: 100%;
+        }
+
+        .articles-page .article-btns-1 {
+            width: 50%;
+        }
+
+        .articles-page .articles .article-btns-1 div {
+            background-color: #e7e7e7;
+            border: .3vw solid #fff;
+            width: 16vw;
+            height: 10.5vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .articles-page .articles .article-btns-1 div:hover {
+            background-color: #efefff;
+        }
+
+        .articles-page .article-btns-1 h1 {
+            position: initial;
+            left: 0;
+        }
+
+        .articles-page .article-btns-1 h1::after {
+            display: none;
+        }
+
+        .articles-page .article-btns-1 img {
+            width: 3.5vw;
+            max-width: 70px;
+            filter: none;
+        }
+
+        .articles-page .article-btns-1 div:last-child img {
+            width: 6vw;
+            max-width: 90px;
+        }
+
+        .article-btns-2 {
+            justify-content: flex-start;
+            width: 90%;
+            position: absolute;
+            bottom: -8vw;
+        }
+
+        .article-btns-2 div {
+            height: 13.3vw;
+            max-height: 290px;
+        }
+
+        .articles-page .img .article-btns div h1 {
+            top: 1%;
+        }
+
+        .articles-page .img .article-btns div h1.active {
+            margin: 0.35vw 0;
+            padding: 1vw 1.6vw;
+            background: #21a1a7;
+            left: 0.65vw;
+            color: #fff;
+        }
+
+        .article-popup {
+            position: absolute;
+            width: 100%;
+            height: inherit;
+            top: 0;
+            left: 0;
+            background: rgba(0, 0, 0, .7);
+            opacity: 0;
+            display: none;
+            transition: opacity .5s ease;
+        }
+
+        .article-popup.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .article-popup .close {
+            float: right;
+            margin-right: 1vw;
+            transform: scale(.75);
+            cursor: pointer;
+            width: 10vw;
+            max-width: 60px;
+        }
+
+        .container {
+            position: absolute;
+            top: 1.5%;
+            left: 50%;
+            width: 50%;
+            height: calc(97% - 2vw);
+            background: #fff;
+            transform: translate(-50%);
+            overflow-y: auto;
+            border-radius: 8px;
+            padding: 1vw 1.5vw;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .listening .container {
+            top: 50%;
+            width: 49%;
+            height: calc(100% - -4vw);
+            padding: 0.5vw 0.75vw;
+            transform: scale(.8) translateY(-35%);
+            -webkit-box-shadow: 0px 0px 6px 2px rgba(128, 128, 128, 1);
+            -moz-box-shadow: 0px 0px 6px 2px rgba(128, 128, 128, 1);
+            box-shadow: 0px 0px 6px 2px rgba(128, 128, 128, 1);
+        }
+
+        .container .article-header {
+            background-color: #21a1a7;
+            padding: .5vw 1.5vw;
+        }
+
+        .listening .container .article-header {
+            padding: 0.5vw 1vw;
+        }
+
+        .container .article-header h1 {
+            font-size: 2vw;
+            font-family: Roboto-M;
+            color: #fff;
+        }
+
+        .listening .container .article-header h1 {
+            font-size: 1vw;
+        }
+
+        .container .main-img {
+            max-width: 96%;
+            margin: 1vw auto;
+            min-width: 90%;
+        }
+
+        .listening .container .main-img {
+            max-width: 80%;
+            margin: 0.4vw auto;
+        }
+
+        .container .p {
+            display: flex;
+            align-items: flex-start;
+            gap: .8vw;
+        }
+
+        .listening .container .p {
+            gap: .4vw;
+        }
+
+        .container .p .triangle {
+            width: 16vw;
+            height: 4.2vw;
+            max-width: 90px;
+            max-height: 90px;
+            background-color: #21a1a7;
+            -webkit-clip-path: polygon(100% 50%, 0 0, 0 100%);
+            clip-path: polygon(100% 50%, 0 0, 0 100%);
+            border-radius: 1.5px;
+        }
+
+        .listening .container .p .triangle {
+            width: 8.5vw;
+            height: 1.8vw;
+            margin-top: 1vw;
+        }
+
+        .container .p p {
+            text-align: justify;
+            margin: .4vw 0;
+            padding-right: 2vw;
+            font-size: .9vw;
+            font-family: Roboto-R;
+            font-weight: lighter;
+            line-height: 1.9;
+        }
+
+        .listening .container .p p {
+            line-height: 1.5;
+        }
+
+        .container .p:last-child p {
+            padding-right: 0;
+            padding-left: 3.9vw;
+        }
+
+        .listening .container .p:last-child p {
+            padding-left: 1.9vw;
+            margin-top: 0;
+        }
+
+        .container .p img {
+            width: 18vw;
+            max-width: 200px;
+            min-width: 32%;
+        }
+
+        .container {
+            scrollbar-width: auto;
+            scrollbar-color: #21a1a7 #ffffff;
+        }
+
+        .container::-webkit-scrollbar {
+            width: .9vw;
+        }
+
+        .container::-webkit-scrollbar-track {
+            background: #e7e7e7;
+            border-radius: 8px;
+        }
+
+        .container::-webkit-scrollbar-thumb {
+            background-color: #21a1a7;
+            border-radius: 10px;
+            border: 3px solid #ffffff;
+        }
+
+        .container::-webkit-scrollbar-thumb:hover {
+            background-color: #1f949a;
+        }
+
+        .questions {
+            width: 94.9%;
+            min-height: 100%;
+            padding: 0 2vw;
+            /* padding-bottom: 4vw; */
+            /* display: none; */
+            position: relative;
+            top: 4vw;
+        }
+
+        .header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1vw;
+            /* border-bottom: .35vw dashed #586D93; */
+            padding-bottom: 3px;
+            padding: 0 2vw;
+            background-color: #e5e1ef;
+        }
+
+        .header img {
+            width: 10vw;
+            max-width: 50px;
+            height: auto;
+            margin-top: 1.35vw;
+        }
+
+        .header p {
+            font-family: "Roboto-M";
+            font-size: 1.8vw;
+            font-weight: 500;
+        }
+
+        .content {
+            padding-top: 2.5vw;
+            display: flex;
+            align-items: center;
+            gap: 3vw;
+        }
+
+        .content .slider {
+            position: relative;
+            display: flex;
+            align-items: center;
+            max-width: 30.1vw;
+            margin-left: 1vw;
+        }
+
+        .content .slider img:not(.arrows) {
+            /* width: 2.5vw; */
+            position: absolute;
+            cursor: pointer;
+            max-width: 1.2vw;
+        }
+
+        .content .slider img.prev {
+            transform: rotateY(180deg) translateX(-0.7vw);
+        }
+
+        .content .slider img.next {
+            right: .8vw;
+        }
+
+        .content .slider .arrows {
+            width: 100%;
+        }
+
+        .content .slider .slider-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #000;
+            font-family: "Roboto-M";
+            font-size: 1.2vw;
+            width: 72%;
+            padding-left: 0.8vw;
+        }
+
+        .content .slide-text .box {
+            width: 27vw;
+            max-width: 400px;
+            background-color: #f3f5f4;
+            padding: .6vw;
+            border: 0.3vw dashed #c2ecee;
+            border-radius: 5px;
+            margin-top: 2.5vw;
+            margin-left: 2vw;
+            max-height: 110px;
+            height: 9vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            resize: none;
+            outline: none;
+            font-size: 1.55vw;
+        }
+
+        .text-btns {
+            float: right;
+            margin: .5vw;
+            display: flex;
+            gap: 0.5vw;
+        }
+
+        .text-btns button {
+            background-color: #1f949a;
+            color: #fff;
+            border: none;
+            outline: none;
+            box-shadow: 0 .15vw .15vw 0px gray;
+            cursor: pointer;
+            font-size: 1.4vw;
+            font-family: "Roboto-MI";
+            font-weight: lighter;
+        }
+
+        .text-btns button:hover {
+            box-shadow: 0 .3vw .3vw 0px gray;
+        }
+
+        @media only screen and (min-width:2350px) {
+            .article-btns-2 {
+                bottom: -6.9vw;
+            }
+        }
+
+        @media only screen and (max-width: 768px) {
+            .questions .content {
+                padding-top: .5vw;
+            }
+
+            .questions .header {
+                align-items: center;
+            }
+
+            .questions .header img {
+                margin-top: 0;
+                max-width: 45px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="preloader">
+        <img id="preloader" src="assets/images/preloader.svg">
+
+    </div>
+
+    <div class="page">
+
+        <!-- home icon  -->
+        <img src="assets/images/home_icon.svg" id="home_icon" class='svg-btn' name="home_icon">
+        <!-- absolute clock pointer   -->
+        <img id="clock_pointer" src="assets/images/clock_pointer.svg">
+        <!-- absolute clock hotspots    -->
+        <div class="hotspot">
+            <div class="hs1" name="home"></div>
+            <div class="hs2" name="vocab"></div>
+            <div class="hs3" name="grammar"></div>
+            <div class="hs4" name="skills"></div>
+        </div>
+        <!-- mobile screen  -->
+        <div class="mobile">
+            <!-- mobile static icon content  -->
+            <div class="contentMbile">
+                <div class="a1">
+                    <img src="assets/images/mini.svg" style="width: 30%;">
+                    <div style="position: absolute;font-family: monospace;
+                        color: white;margin-top: 1%;" id="mainTitle">
+                        Lesson 1
+                    </div>
+                </div>
+                <div class="a2">
+                    <img src="assets/images/reload_icon.svg" class='svg-btn' style="width: 6%;">
+                    <img src="assets/images/help_icon.svg" class='svg-btn' style="width: 6%;margin-right: 3%;">
+                </div>
+                <!-- mobile dynamic fipped content  -->
+                <div class="dynamic-content-wrapper">
+                    <!-- <img src="assets/images/WritingtestImage.svg" style="width:90%"> -->
+
+                    <div class="listening" style="width: 100%;">
+                        <div class='listening-intro'><img src="./assets/listening/Asset 33.svg" style="width: 95%;"><img
+                                class='start-listening' src="./assets/images/start.svg"></div>
+                        <div class='listening-content'>
+                            <div class="header">
+                                <img src="./assets/listening/icon titel.svg" alt="">
+                                <p>Discuss these questions about the travel advertisements.</p>
+                            </div>
+                            <div class="audio">
+                                <div id="visualizations-player">
+                                    <div class="top-container">
+                                        <img class="now-playing-album-art" id="large-now-playing-album-art"
+                                            data-amplitude-song-info="cover_art_url" />
+                                        <div class="amplitude-visualization" id="large-visualization">
+
+                                        </div>
+                                        <div class="visualization-toggle visualization-on"></div>
+                                        <div class="amplitude-shuffle"></div>
+                                        <div class="amplitude-repeat"></div>
+                                    </div>
+
+                                    <div class="meta-data-container">
+                                        <span class="now-playing-name" data-amplitude-song-info="name"></span>
+                                        <span class="now-playing-artist-album">
+                                            <span class="now-playing-artist" data-amplitude-song-info="artist"></span> -
+                                            <span class="now-playing-album" data-amplitude-song-info="album"></span>
+                                        </span>
+                                    </div>
+
+                                    <div class="amplitude-wave-form">
+
+                                    </div>
+                                    <input type="range" class="amplitude-song-slider" id="global-large-song-slider" />
+
+                                    <div>
+                                        <span class="amplitude-current-time"></span>
+
+                                        <span class="amplitude-time-remaining"></span>
+                                    </div>
+
+                                    <div class="control-container">
+                                        <div class="amplitude-prev">
+
+                                        </div>
+
+                                        <div class="amplitude-play-pause amplitude-paused">
+
+                                        </div>
+
+                                        <div class="amplitude-next">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="song-navigation">
+                                        <input type="range" class="amplitude-song-slider" />
+                                    </div>
+
+                                    <div class="arrow-up">
+                                        <img src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/arrow-up.svg"
+                                            class="arrow-up-icon" />
+                                    </div>
+
+                                    <div id="visualizations-player-playlist">
+                                        <div class="top-arrow">
+                                            <img src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/arrow-down.svg"
+                                                class="arrow-down-icon" />
+                                        </div>
+
+                                        <div class="top">
+                                            <span class="playlist-title">Songs</span>
+                                            <div class="amplitude-repeat">
+
+                                            </div>
+                                            <div class="amplitude-shuffle">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="songs-container">
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="0">
+                                                <span class="song-position">01</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="0" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="0"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="0"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="1">
+                                                <span class="song-position">02</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="1" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="1"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="1"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="2">
+                                                <span class="song-position">03</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="2" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="2"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="2"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="3">
+                                                <span class="song-position">04</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="3" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="3"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="3"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="4">
+                                                <span class="song-position">05</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="4" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="4"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="4"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="5">
+                                                <span class="song-position">06</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="5" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="5"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="5"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="6">
+                                                <span class="song-position">07</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="6" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="6"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="6"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="7">
+                                                <span class="song-position">08</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="7" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="7"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="7"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="8">
+                                                <span class="song-position">09</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="8" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="8"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="8"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="9">
+                                                <span class="song-position">10</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="9" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="9"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="9"></span>
+                                                </div>
+                                            </div>
+                                            <div class="song amplitude-song-container amplitude-play-pause"
+                                                data-amplitude-song-index="10">
+                                                <span class="song-position">11</span>
+                                                <img class="song-album-art" data-amplitude-song-info="cover_art_url"
+                                                    data-amplitude-song-index="10" />
+                                                <div class="song-meta-data-container">
+                                                    <span class="song-name" data-amplitude-song-info="name"
+                                                        data-amplitude-song-index="10"></span>
+                                                    <span class="song-artist" data-amplitude-song-info="artist"
+                                                        data-amplitude-song-index="10"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="active-audio">
+                                            <img class="cover-art-small" data-amplitude-song-info="cover_art_url" />
+
+                                            <div class="active-audio-right">
+                                                <span class="song-name" data-amplitude-song-info="name"></span>
+
+                                                <div class="active-audio-controls">
+                                                    <div class="amplitude-prev"></div>
+                                                    <div class="amplitude-play-pause"></div>
+                                                    <div class="amplitude-next"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="pre-load-img-container">
+                                    <img
+                                        src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/play.svg" />
+                                    <img
+                                        src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/pause.svg" />
+                                    <img
+                                        src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/next.svg" />
+                                    <img
+                                        src="https://521dimensions.com/img/open-source/amplitudejs/examples/visualizations/prev.svg" />
+                                </div>
+                                <a class="learn-more"
+                                    href="https://serversideup.net/courses/amplitudejs-from-the-ground-up/">Learn More
+                                    on Server Side Up</a>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+                                    <defs>
+                                        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                                            <stop offset="0%" stop-color="#03C1EB" />
+                                            <stop offset="100%" stop-color="#86F3B8" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="questions">
+                            <div class="header">
+                                <img src="./assets/listening/icon titel.svg" alt="">
+                                <p>Discuss these questions about the travel advertisements.</p>
+                            </div>
+                            <div class="content">
+                                <div class="slide-text">
+                                    <div class="slider">
+                                        <span id="article"></span>
+                                        <img src="./assets/listening/ARROW 1.svg" class="prev" alt="">
+                                        <img src="./assets/listening/back.svg" class="arrows" alt="">
+                                        <img src="./assets/listening/ARROW 1.svg" class="next" alt="">
+                                        <p class="slider-title"></p>
+                                    </div>
+                                    <textarea class="box" cols="30" rows="10"></textarea>
+                                    <div class="text-btns">
+                                        <button>clear</button>
+                                        <button>send</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <script src="assets/js/main.js"></script>
+    <script src="assets/js/Amplitude.js"></script>
+    <script src="assets/js/audio.js"></script>
+    <script>
+        const start_listening_btn = document.querySelector(".start-listening");
+        const article_btns = document.querySelectorAll(".article-btn");
+        const inner_article_btns = document.querySelectorAll(".article-btns-1 div");
+        const listening_content = document.querySelector(".listening-content");
+
+        const questions = document.querySelector(".questions");
+        const slider_title = document.querySelector('.slider-title');
+        const prev = document.querySelector('.prev');
+        const next = document.querySelector('.next');
+        const text_btns = document.querySelectorAll('.text-btns button');
+        let c = 0;
+
+
+        start_listening_btn.addEventListener("click", () => {
+            const listening_intro = document.querySelector(".listening-intro");
+            listening_intro.style.display = "none";
+            listening_content.style.display = "block";
+
+        })
+        article_btns.forEach((btn, btnIndx) => {
+            btn.addEventListener("click", () => {
+                listening_content.style.display = "none";
+                questions.style.display = "none";
+                articles_page.style.display = "block";
+                img.style.visibility = "initial";
+                articles_page_content.style.display = "flex";
+
+            })
+        })
+
+        let texts = [
+            ['1. What is the destination of this trip?',
+                '2. How much does the trip cost?',
+                '3. What is the primary mode of transportation?',
+                '4. Write down the itinerary of the trip.',
+                '5. Name three cities that tourists are expected to visit.'],
+            ['1. What is the destination of this trip?',
+                '2. What is the slogan, motto, or philosophy for this trip?',
+                '3. Name four types of transportation that tourists will use on the trip.',
+                '4. What is the trip length?',
+                '5. Where will the tourists sleep?'],
+            ['1. What is the length of the Historic Britain Tour?',
+                '2. How much does it cost to go on the Historic Britain Tour?',
+                '3. What is the first method of transportation that tourists will use?',
+                '4. Name seven destinations that tourists are expected to visit.',
+                '5. Where was Shakespeare born?']
+        ]
+        prev.style.opacity = '.6';
+        prev.style.cursor = 'initial';
+
+        prev.addEventListener("click", () => {
+            next.style.opacity = '1';
+            next.style.cursor = 'pointer';
+            if (c != 0) {
+                c--;
+                slider_title.innerText = texts[articleNum][c];
+                document.querySelector(".box").value = "";
+
+            } if (c == 0) {
+                prev.style.opacity = '.6';
+                prev.style.cursor = 'initial';
+            }
+        })
+
+        next.addEventListener("click", () => {
+            if (c != texts[articleNum].length - 1) {
+                prev.style.opacity = '1';
+                prev.style.cursor = 'pointer';
+                c++;
+                document.querySelector(".box").value = "";
+                if (c > texts[articleNum].length) {
+                    next.style.opacity = '.6';
+                    next.style.cursor = 'initial';
+                    c = texts[articleNum].length;
+                }
+                slider_title.innerText = texts[articleNum][c];
+            }
+            if (c == texts[articleNum].length - 1) {
+                next.style.opacity = '.6';
+                next.style.cursor = 'initial';
+            }
+        })
+        text_btns[0].addEventListener("click", () => {
+            const box = document.querySelector(".box");
+            box.value = ""
+        })
+        text_btns[1].addEventListener("click", () => {
+            const box = document.querySelector(".box");
+            console.log(box.value);
+        })
+    </script>
+</body>
+
+</html>
