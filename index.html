@@ -49,16 +49,16 @@
 
         .start-listening {
             position: absolute;
-            top: 65%;
+            top: 70%;
             left: 50%;
             width: 10vw;
-            transform: translate(-60%, 65%);
+            transform: translate(-60%, 70%);
             cursor: pointer;
         }
 
         .listening-content {
             width: 95%;
-            margin: 2vw auto;
+            margin: 3vw auto;
         }
 
         .listening-content,
@@ -71,9 +71,25 @@
 
         .part {
             display: none;
-            position: relative;
+            height: 7%;
+            width: 24%;
+            background-image: url(./assets/images/BGQ.svg);
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: contain;
+            font-family: btn;
+            color: #fff;
+            text-align: center;
+            border: none;
+            background-color: transparent;
+            font-size: 1.2vw;
+            position: absolute;
+            top: 10%;
+            left: 3%;
             cursor: pointer;
-            left: 3vw;
+            z-index: 3;
+            padding: 0;
+            margin: 0;
         }
 
         .audio-btns {
@@ -314,6 +330,10 @@
                 margin-top: 0;
                 max-width: 45px;
             }
+
+            /* .content .slide-text .box {
+                margin-top: 1vw;
+            } */
         }
     </style>
 

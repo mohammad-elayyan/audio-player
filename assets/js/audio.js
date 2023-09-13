@@ -26,17 +26,17 @@ Amplitude.init({
   // visualization: "michaelbromley_visualization",
   songs: [
     {
-      name: "Risin' High (feat Raashan Ahmad)",
-      artist: "Ancient Astronauts",
-      album: "We Are to Answer",
-      url: "./assets/2.mp3",
+      name: "Tourism in Britain, Europe and Asia",
+      // artist: "Ancient Astronauts",
+      // album: "We Are to Answer",
+      url: "./assets/audio/tourism.mp3",
       // cover_art_url: "./assets/listening/a.png",
       // visualization: "michaelbromley_visualization",
     },
   ],
 
   waveforms: {
-    sample_rate: 50,
+    sample_rate: 300,
   },
   callbacks: {
     stop: function () {
